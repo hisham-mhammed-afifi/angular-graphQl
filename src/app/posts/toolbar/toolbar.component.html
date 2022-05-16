@@ -1,0 +1,30 @@
+<div class="row mt-3">
+  <div class="col-8">
+    <input class="form-control" type="search" placeholder="search..." />
+  </div>
+  <div class="col-4">
+    <select class="form-select" aria-label="Default select example">
+      <option selected disabled>Sort</option>
+      <option value="1">ASC</option>
+      <option value="2">DESC</option>
+    </select>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-6"></div>
+  <div class="col-6 d-flex justify-content-end">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" (click)="prev()">Prev</a>
+        </li>
+        <li class="page-item"><a class="page-link">1</a></li>
+        <li class="page-item"><a class="page-link">2</a></li>
+        <li class="page-item"><a class="page-link">3</a></li>
+        <li class="page-item">
+          <a class="page-link" (click)="next()">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
