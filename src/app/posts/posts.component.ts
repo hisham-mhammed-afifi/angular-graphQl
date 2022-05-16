@@ -8,7 +8,8 @@ import { PostsService } from '../services/posts.service';
 })
 export class PostsComponent implements OnInit {
   posts: any[] = [];
-  pages: number = 0;
+  paginatedPosts: any[] = [];
+  pages: number[] = [];
   itemsPerPage: number = 10;
   pageNum: number = 1;
 
@@ -16,9 +17,17 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postsSrv.all().subscribe(({ data: { posts } }) => {
-      this.posts = this.paginate(posts.data, this.itemsPerPage, this.pageNum);
-      this.pages = Math.floor(posts.data.length / this.itemsPerPage);
+      this.posts = posts.data;
+      this.pages = [
+        ...Array(Math.floor(posts.data.length / this.itemsPerPage)).keys(),
+      ].map((k) => k + 1);
+      this.paginatedPosts = this.paginate(
+        [...this.posts],
+        this.itemsPerPage,
+        this.pageNum
+      );
     });
+
     // dont do that
     this.add();
     this.delete();
@@ -26,17 +35,28 @@ export class PostsComponent implements OnInit {
   }
 
   next() {
-    this.pageNum < this.pages ? this.pageNum++ : (this.pageNum = 10);
-    this.posts = this.paginate(
+    this.pageNum < this.pages.length ? this.pageNum++ : (this.pageNum = 10);
+    this.paginatedPosts = this.paginate(
       [...this.posts],
       this.itemsPerPage,
       this.pageNum
     );
-    console.log(this.posts);
-    console.log(this.pageNum);
   }
   prev() {
-    this.pageNum > 0 ? this.pageNum - 1 : (this.pageNum = 1);
+    this.pageNum > 1 ? this.pageNum-- : (this.pageNum = 1);
+    this.paginatedPosts = this.paginate(
+      [...this.posts],
+      this.itemsPerPage,
+      this.pageNum
+    );
+  }
+
+  changePage(page: number) {
+    this.paginatedPosts = this.paginate(
+      [...this.posts],
+      this.itemsPerPage,
+      page
+    );
   }
 
   paginate(items: Array<any>, itemsPerPage: number, pageNum: number) {

@@ -1,2 +1,7 @@
-<app-toolbar (onNext)="next()" (onPrev)="prev()"></app-toolbar>
-<app-tabel [items]="posts"></app-tabel>
+<app-toolbar
+  [pages]="pages"
+  (onNext)="next()"
+  (onPrev)="prev()"
+  (onChangePage)="changePage($event)"
+></app-toolbar>
+<app-tabel [items]="paginatedPosts"></app-tabel>
