@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit {
     this.postsSrv.all().subscribe(({ data: { posts } }) => {
       this.posts = posts.data;
       this.pages = [
-        ...Array(Math.floor(posts.data.length / this.itemsPerPage)).keys(),
+        ...Array(Math.ceil(posts.data.length / this.itemsPerPage)).keys(),
       ].map((k) => k + 1);
       this.paginatedPosts = this.paginate(
         [...this.posts],
@@ -35,7 +35,9 @@ export class PostsComponent implements OnInit {
   }
 
   next() {
-    this.pageNum < this.pages.length ? this.pageNum++ : (this.pageNum = 10);
+    this.pageNum < this.pages.length
+      ? this.pageNum++
+      : (this.pageNum = this.pages.length);
     this.paginatedPosts = this.paginate(
       [...this.posts],
       this.itemsPerPage,

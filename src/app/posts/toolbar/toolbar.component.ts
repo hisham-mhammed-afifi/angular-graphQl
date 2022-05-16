@@ -11,18 +11,23 @@ export class ToolbarComponent implements OnInit {
   @Output() onNext = new EventEmitter();
   @Output() onChangePage = new EventEmitter();
 
+  currentPage = 1;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   prev() {
+    this.currentPage--;
     this.onPrev.emit();
   }
   next() {
+    this.currentPage++;
     this.onNext.emit();
   }
 
   paginate(page: number) {
     this.onChangePage.emit(page);
+    this.currentPage = page;
   }
 }
