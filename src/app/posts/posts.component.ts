@@ -52,6 +52,7 @@ export class PostsComponent implements OnInit {
   }
 
   changePage(page: number) {
+    this.pageNum = page;
     this.paginatedPosts = this.paginate(
       [...this.posts],
       this.itemsPerPage,
