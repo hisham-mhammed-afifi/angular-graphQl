@@ -38,6 +38,7 @@ export class PostsComponent implements OnInit {
     this.pageNum < this.pages.length
       ? this.pageNum++
       : (this.pageNum = this.pages.length);
+    // for search then paginate
     this.posts = this.filterArr(this.posts);
     this.paginatedPosts = this.paginate(
       [...this.posts],
@@ -47,6 +48,7 @@ export class PostsComponent implements OnInit {
   }
   prev() {
     this.pageNum > 1 ? this.pageNum-- : (this.pageNum = 1);
+    // for search then paginate
     this.posts = this.filterArr(this.posts);
     this.paginatedPosts = this.paginate(
       [...this.posts],
@@ -57,6 +59,7 @@ export class PostsComponent implements OnInit {
 
   changePage(page: number) {
     this.pageNum = page;
+    // for search then paginate
     this.posts = this.filterArr(this.posts);
     this.paginatedPosts = this.paginate(
       [...this.posts],
