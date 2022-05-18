@@ -1,5 +1,5 @@
 <div class="row mt-3">
-  <div class="col-8">
+  <div class="col-6">
     <input
       class="form-control"
       type="search"
@@ -7,17 +7,13 @@
       (input)="search($event)"
     />
   </div>
-  <div class="col-4">
+  <div class="col">
     <select class="form-select" aria-label="Default select example">
-      <option selected disabled>Sort</option>
-      <option value="1">ASC</option>
-      <option value="2">DESC</option>
+      <option value="1" selected>Sort - ASC</option>
+      <option value="2">Sort - DESC</option>
     </select>
   </div>
-</div>
-<div class="row mt-2">
-  <div class="col-6"></div>
-  <div class="col-6 d-flex justify-content-end">
+  <div class="col">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item">

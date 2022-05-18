@@ -47,13 +47,13 @@ export class PostsService {
       query: GET_POSTS,
     }).valueChanges;
   }
-  create() {
+  create(post: any) {
     return this.apollo.mutate({
       mutation: CREATE_POST,
       variables: {
         input: {
-          title: 'A Very Captivating Post Title',
-          body: 'Some interesting content.',
+          title: post.title,
+          body: post.body,
         },
       },
     });
@@ -70,11 +70,11 @@ export class PostsService {
       },
     });
   }
-  delete() {
+  delete(id: number) {
     return this.apollo.mutate({
       mutation: DELETE_POST,
       variables: {
-        id: 101,
+        id,
       },
     });
   }

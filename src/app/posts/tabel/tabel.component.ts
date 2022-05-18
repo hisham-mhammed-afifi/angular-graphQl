@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tabel',
@@ -7,8 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TabelComponent implements OnInit {
   @Input() items: any[] = [];
+  @Output() onDelete = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  delete(item: any) {
+    this.onDelete.emit(item.id);
+  }
 }

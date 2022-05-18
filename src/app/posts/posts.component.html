@@ -1,3 +1,4 @@
+<app-form (onSubmit)="submit($event)"></app-form>
 <app-toolbar
   [pages]="pages"
   (onNext)="next()"
@@ -5,4 +6,4 @@
   (onChangePage)="changePage($event)"
   (onSearch)="search($event)"
 ></app-toolbar>
-<app-tabel [items]="paginatedPosts"></app-tabel>
+<app-tabel [items]="paginatedPosts" (onDelete)="delete($event)"></app-tabel>
