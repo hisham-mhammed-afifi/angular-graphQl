@@ -58,14 +58,14 @@ export class PostsService {
       },
     });
   }
-  update() {
+  update(post: any) {
     return this.apollo.mutate({
       mutation: UPDATE_POST,
       variables: {
-        id: 1,
+        id: post.id,
         input: {
-          title: 'This new title.',
-          body: 'Some updated content.',
+          title: post.title,
+          body: post.body,
         },
       },
     });

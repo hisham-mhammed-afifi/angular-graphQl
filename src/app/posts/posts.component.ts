@@ -7,6 +7,7 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
+  post: any = {};
   posts: any[] = [];
   paginatedPosts: any[] = [];
   filteredPosts: any[] = [];
@@ -101,7 +102,8 @@ export class PostsComponent implements OnInit {
   }
   sort(value: string) {
     if (value === 'ASC') {
-      this.sortedPosts = this.sortArrASC(this.posts);
+      this.filteredPosts = this.filterArr(this.posts);
+      this.sortedPosts = this.sortArrASC(this.filteredPosts);
 
       this.paginatedPosts = this.paginate(
         [...this.sortedPosts],
@@ -109,7 +111,8 @@ export class PostsComponent implements OnInit {
         this.pageNum
       );
     } else {
-      this.sortedPosts = this.sortArrDESC(this.posts);
+      this.filteredPosts = this.filterArr(this.posts);
+      this.sortedPosts = this.sortArrDESC(this.filteredPosts);
 
       this.paginatedPosts = this.paginate(
         [...this.sortedPosts],
@@ -149,11 +152,29 @@ export class PostsComponent implements OnInit {
       },
     });
   }
-  update() {
-    this.postsSrv.update().subscribe((data) => console.log(data));
+  update(post: any) {
+    this.postsSrv.update(post).subscribe({
+      next: () => {
+        this.posts = [...this.posts].map((p) => (p.id === post.id ? post : p));
+        this.sortedPosts = this.sortArrASC(this.posts);
+
+        this.paginatedPosts = this.paginate(
+          [...this.sortedPosts],
+          this.itemsPerPage,
+          this.pageNum
+        );
+      },
+    });
   }
 
   submit(post: any) {
-    this.add(post);
+    if (post.id) {
+      this.update(post);
+    } else {
+      this.add(post);
+    }
+  }
+  setFormForUpdate(post: any) {
+    this.post = post;
   }
 }

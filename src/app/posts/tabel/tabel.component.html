@@ -13,8 +13,8 @@
       <td>{{ item.title }}</td>
       <td [innerHtml]="item.body"></td>
       <td style="width: 165px">
-        <button class="btn btn-info me-2">Edit</button>
-        <button class="btn btn-danger" (click)="delete(item.id)">Delete</button>
+        <button class="btn btn-info me-2" (click)="update(item)">Edit</button>
+        <button class="btn btn-danger" (click)="delete(item)">Delete</button>
       </td>
     </tr>
   </tbody>

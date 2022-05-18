@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -14,6 +15,7 @@ import { Editor } from 'ngx-editor';
 })
 export class FormComponent implements OnInit, OnDestroy {
   editor: Editor;
+  @Input() item: any = {};
 
   @Output() onSubmit = new EventEmitter();
 
@@ -24,7 +26,13 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   submit(form: any) {
-    this.onSubmit.emit(form.value);
+    if (this.item.id) {
+      this.onSubmit.emit({ ...this.item, ...form.value });
+    } else {
+      this.onSubmit.emit(form.value);
+    }
+    form.resetForm();
+    this.item = { title: '', body: '' };
   }
 
   ngOnDestroy(): void {

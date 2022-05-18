@@ -8,12 +8,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TabelComponent implements OnInit {
   @Input() items: any[] = [];
   @Output() onDelete = new EventEmitter();
+  @Output() onUpdate = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  delete(id: any) {
-    this.onDelete.emit(id);
+  delete(item: any) {
+    this.onDelete.emit(item.id);
+  }
+
+  update(item: any) {
+    this.onUpdate.emit(item);
   }
 }
