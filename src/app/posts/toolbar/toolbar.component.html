@@ -8,9 +8,9 @@
     />
   </div>
   <div class="col">
-    <select class="form-select" aria-label="Default select example">
-      <option value="1" selected>Sort - ASC</option>
-      <option value="2">Sort - DESC</option>
+    <select class="form-select" (change)="select($event)">
+      <option value="ASC" selected>Sort - ASC</option>
+      <option value="DESC">Sort - DESC</option>
     </select>
   </div>
   <div class="col">

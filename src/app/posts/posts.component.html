@@ -5,5 +5,6 @@
   (onPrev)="prev()"
   (onChangePage)="changePage($event)"
   (onSearch)="search($event)"
+  (onSelect)="sort($event)"
 ></app-toolbar>
 <app-tabel [items]="paginatedPosts" (onDelete)="delete($event)"></app-tabel>

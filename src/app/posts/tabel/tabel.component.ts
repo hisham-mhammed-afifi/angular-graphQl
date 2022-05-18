@@ -13,7 +13,7 @@ export class TabelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  delete(item: any) {
-    this.onDelete.emit(item.id);
+  delete(id: any) {
+    this.onDelete.emit(id);
   }
 }

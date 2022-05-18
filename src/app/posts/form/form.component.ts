@@ -23,8 +23,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  submit(e: any) {
-    this.onSubmit.emit(e.value);
+  submit(form: any) {
+    this.onSubmit.emit(form.value);
   }
 
   ngOnDestroy(): void {

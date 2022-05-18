@@ -11,6 +11,7 @@ export class ToolbarComponent implements OnInit {
   @Output() onNext = new EventEmitter();
   @Output() onChangePage = new EventEmitter();
   @Output() onSearch = new EventEmitter();
+  @Output() onSelect = new EventEmitter();
 
   currentPage = 1;
 
@@ -34,5 +35,9 @@ export class ToolbarComponent implements OnInit {
 
   search(e: Event) {
     this.onSearch.emit((e.target as HTMLInputElement).value);
+  }
+
+  select(e: any) {
+    this.onSelect.emit(e.target.value);
   }
 }

@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
     this.postsSrv.all().subscribe(({ data: { posts } }) => {
       this.posts = posts.data;
       this.pages = this.getPages(this.posts);
-      this.sortedPosts = this.sortArr(this.posts);
+      this.sortedPosts = this.sortArrASC(this.posts);
 
       this.paginatedPosts = this.paginate(
         [...this.sortedPosts],
@@ -42,7 +42,6 @@ export class PostsComponent implements OnInit {
       : (this.pageNum = this.pages.length);
     // for search then paginate
     this.filteredPosts = this.filterArr(this.posts);
-    this.sortedPosts = this.sortArr(this.filteredPosts);
     this.paginatedPosts = this.paginate(
       this.sortedPosts,
       this.itemsPerPage,
@@ -53,7 +52,6 @@ export class PostsComponent implements OnInit {
     this.pageNum > 1 ? this.pageNum-- : (this.pageNum = 1);
     // for search then paginate
     this.filteredPosts = this.filterArr(this.posts);
-    this.sortedPosts = this.sortArr(this.filteredPosts);
     this.paginatedPosts = this.paginate(
       this.sortedPosts,
       this.itemsPerPage,
@@ -65,7 +63,6 @@ export class PostsComponent implements OnInit {
     this.pageNum = page;
     // for search then paginate
     this.filteredPosts = this.filterArr(this.posts);
-    this.sortedPosts = this.sortArr(this.filteredPosts);
     this.paginatedPosts = this.paginate(
       this.sortedPosts,
       this.itemsPerPage,
@@ -96,8 +93,30 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  sortArr(arr: any[]) {
+  sortArrASC(arr: any[]) {
     return [...arr].sort((a: any, b: any) => b.id - a.id);
+  }
+  sortArrDESC(arr: any[]) {
+    return [...arr].sort((a: any, b: any) => a.id - b.id);
+  }
+  sort(value: string) {
+    if (value === 'ASC') {
+      this.sortedPosts = this.sortArrASC(this.posts);
+
+      this.paginatedPosts = this.paginate(
+        [...this.sortedPosts],
+        this.itemsPerPage,
+        this.pageNum
+      );
+    } else {
+      this.sortedPosts = this.sortArrDESC(this.posts);
+
+      this.paginatedPosts = this.paginate(
+        [...this.sortedPosts],
+        this.itemsPerPage,
+        this.pageNum
+      );
+    }
   }
 
   add(post: any) {
@@ -105,7 +124,7 @@ export class PostsComponent implements OnInit {
       next: (data: any) => {
         this.posts = [data.data.createPost, ...this.posts];
         this.pages = this.getPages(this.posts);
-        this.sortedPosts = this.sortArr(this.posts);
+        this.sortedPosts = this.sortArrASC(this.posts);
 
         this.paginatedPosts = this.paginate(
           [...this.sortedPosts],
@@ -120,7 +139,7 @@ export class PostsComponent implements OnInit {
       next: () => {
         this.posts = [...this.posts].filter((p) => p.id !== id);
         this.pages = this.getPages(this.posts);
-        this.sortedPosts = this.sortArr(this.posts);
+        this.sortedPosts = this.sortArrASC(this.posts);
 
         this.paginatedPosts = this.paginate(
           [...this.sortedPosts],
